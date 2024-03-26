@@ -1,7 +1,7 @@
 # pico2venus
 README March 2024
 
-Pico Marine 2 Victron Venus Integration
+Simarine pico 2 Victron Venus Integration
 
 This project is loosely based on source code from:
  - https://github.com/LHardwick-git/Victron-Service/tree/main with gratitude to LHardwick-git
@@ -11,7 +11,7 @@ This project is loosely based on source code from:
 ### Early commit
 This is work in progress to be refined first half of 2024
 
-The purpose of this project is to gather data from a Pico Marine system through the wifi network and feed the data to a victron venus system running on a raspberry pi
+The purpose of this project is to gather data from a Simarine pico system through the wifi network and feed the data to a victron venus system running on a raspberry pi.
 
 Currently this application supports reading of battery banks and tanks levels.
 

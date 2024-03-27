@@ -7,6 +7,8 @@ This project is loosely based on source code from:
  - https://github.com/LHardwick-git/Victron-Service/tree/main with gratitude to LHardwick-git
  - https://github.com/htool/pico2signalk with gratitude to Hans htool
 
+### Disclaimer
+The originators mentioned above should not be blamed for any malfunctions or bugs that I may have introduced in this project since the intention of the code presented here is for an alternate purpose inspired by the original copyright owners.
 
 ### Early commit
 This is work in progress to be refined first half of 2024

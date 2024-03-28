@@ -60,7 +60,7 @@ def update_values():
         return
 
     if not values:
-        logging.info('update_values: No new data from file /run/udev/data/pico.json')
+        logging.info('update_values: No new data from file /run/udev/data/pico-data.json')
         return
 
 #    print(json.dumps(values, indent=2))
@@ -74,14 +74,12 @@ def update_values():
 
                 elif values[str(item)]["name"] == "Water Main":
                     dbusservice['pico_srv-2']['/Level'] =               float(values[str(item)]["currentLevel"]) * 1000 / dbusservice['pico_srv-1']['/Capacity'] / 10  
-                    dbusservice['pico_srv-3']['/Level'] =               float(values[str(item)]["currentVolume"])
+                    dbusservice['pico_srv-2']['/Remaining'] =           float(values[str(item)]["currentVolume"])
                     dbusservice['pico_srv-2']['/Connected'] = 1
-                    dbusservice['pico_srv-3']['/Connected'] = 1
 
                 elif values[str(item)]["name"] == "Water Spare":
-                    dbusservice['pico_srv-2']['/Level'] =               float(values[str(item)]["currentLevel"]) * 1000 / dbusservice['pico_srv-1']['/Capacity'] / 10  
-                    dbusservice['pico_srv-3']['/Level'] =               float(values[str(item)]["currentVolume"])
-                    dbusservice['pico_srv-2']['/Connected'] = 1
+                    dbusservice['pico_srv-3']['/Level'] =               float(values[str(item)]["currentLevel"]) * 1000 / dbusservice['pico_srv-1']['/Capacity'] / 10
+                    dbusservice['pico_srv-3']['/Remaining'] =           float(values[str(item)]["currentVolume"])
                     dbusservice['pico_srv-3']['/Connected'] = 1
 
                 elif values[str(item)]["name"] == "Service Bank":

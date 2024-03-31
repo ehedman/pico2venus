@@ -64,31 +64,35 @@ def update_values():
         return
 
 #    print(json.dumps(values, indent=2))
+
+# NOTE: Custom Name (dbusservice /CustomName) must be set in the remote console to match the naming convention in the Pico device.
+# Consequently, changing the name in the Pico device must be followed up with the corresponding change in the Venus system.
+
     try: 
         for item in range(0, len(values)):
             if "name" in values[str(item)]:
-                if  values[str(item)]["name"] == "Diesel":
-                    dbusservice['pico_srv-1']['/Level'] =               float(values[str(item)]["currentLevel"]) * 1000 / dbusservice['pico_srv-1']['/Capacity'] / 10
+                if  values[str(item)]["name"] == dbusservice['pico_srv-1']['/CustomName']:
+                    dbusservice['pico_srv-1']['/Level'] =               float(values[str(item)]["currentLevel"]*100)
                     dbusservice['pico_srv-1']['/Remaining'] =           float(values[str(item)]["currentVolume"])
                     dbusservice['pico_srv-1']['/Connected'] = 1
 
-                elif values[str(item)]["name"] == "Water Main":
-                    dbusservice['pico_srv-2']['/Level'] =               float(values[str(item)]["currentLevel"]) * 1000 / dbusservice['pico_srv-1']['/Capacity'] / 10  
+                elif values[str(item)]["name"] == "dbusservice['pico_srv-2']['/CustomName']":
+                    dbusservice['pico_srv-2']['/Level'] =               float(values[str(item)]["currentLevel"]*100)
                     dbusservice['pico_srv-2']['/Remaining'] =           float(values[str(item)]["currentVolume"])
                     dbusservice['pico_srv-2']['/Connected'] = 1
 
-                elif values[str(item)]["name"] == "Water Spare":
-                    dbusservice['pico_srv-3']['/Level'] =               float(values[str(item)]["currentLevel"]) * 1000 / dbusservice['pico_srv-1']['/Capacity'] / 10
+                elif values[str(item)]["name"] == dbusservice['pico_srv-2']['/CustomName']:
+                    dbusservice['pico_srv-3']['/Level'] =               float(values[str(item)]["currentLevel"]*100)
                     dbusservice['pico_srv-3']['/Remaining'] =           float(values[str(item)]["currentVolume"])
                     dbusservice['pico_srv-3']['/Connected'] = 1
 
-                elif values[str(item)]["name"] == "Service Bank":
+                elif values[str(item)]["name"] == dbusservice['pico_srv-4']['/CustomName']:
                     dbusservice['pico_srv-4']['/Dc/0/Voltage'] =        round(float(values[str(item)]["voltage"]),2)
-                    dbusservice['pico_srv-4']['/Dc/0/Current'] =        round(float(values[str(item)]["current"]),2)
-                    dbusservice['pico_srv-4']['/Dc/0/Power'] =          round(float(values[str(item)]["voltage"]) * float(values[str(item)]["current"]),1)
-                    dbusservice['pico_srv-4']['/TimeToGo'] =            float(values[str(item)]["capacity.timeRemaining"]) * 100
+                    dbusservice['pico_srv-4']['/Dc/0/Current'] =        round(1- float(values[str(item)]["current"])-1,2)
+                    dbusservice['pico_srv-4']['/Dc/0/Power'] =          round(1- float(values[str(item)]["voltage"]) * float(values[str(item)]["current"])-1,1)
+                    dbusservice['pico_srv-4']['/TimeToGo'] =            int(values[str(item)]["capacity.timeRemaining"]*6)
                     dbusservice['pico_srv-4']['/Soc'] =                 float(values[str(item)]["stateOfCharge"]) * 100
-                    dbusservice['pico_srv-4']['/Dc/0/Temperature'] =    10.0
+                    dbusservice['pico_srv-4']['/Dc/0/Temperature'] =    20.0
                     dbusservice['pico_srv-4']['/Connected'] = 1
 
                 elif  values[str(item)]["name"] == "Start Battery":

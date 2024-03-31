@@ -92,11 +92,13 @@ def update_values():
                     dbusservice['pico_srv-4']['/Dc/0/Power'] =          round(1- float(values[str(item)]["voltage"]) * float(values[str(item)]["current"])-1,1)
                     dbusservice['pico_srv-4']['/TimeToGo'] =            int(values[str(item)]["capacity.timeRemaining"]*6)
                     dbusservice['pico_srv-4']['/Soc'] =                 float(values[str(item)]["stateOfCharge"]) * 100
-                    dbusservice['pico_srv-4']['/Dc/0/Temperature'] =    20.0
                     dbusservice['pico_srv-4']['/Connected'] = 1
 
                 elif  values[str(item)]["name"] == "Start Battery":
                     dbusservice['pico_srv-4']['/Dc/1/Voltage'] =        round(float(values[str(item)]["voltage"]),2)
+
+                elif  values[str(item)]["name"] == "TM 1":
+                    dbusservice['pico_srv-4']['/Dc/0/Temperature'] =    round(float(values[str(item)]["temperature"])-273.15,1)
                     
     except BaseException:
         logging.info("update_values: An exception was thrown!", exc_info=True)

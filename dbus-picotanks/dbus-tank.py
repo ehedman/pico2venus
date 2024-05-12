@@ -76,12 +76,12 @@ def update_values():
                     dbusservice['pico_srv-1']['/Remaining'] =           float(values[str(item)]["currentVolume"])
                     dbusservice['pico_srv-1']['/Connected'] = 1
 
-                elif values[str(item)]["name"] == "dbusservice['pico_srv-2']['/CustomName']":
+                elif values[str(item)]["name"] == dbusservice['pico_srv-2']['/CustomName']:
                     dbusservice['pico_srv-2']['/Level'] =               float(values[str(item)]["currentLevel"]*100)
                     dbusservice['pico_srv-2']['/Remaining'] =           float(values[str(item)]["currentVolume"])
                     dbusservice['pico_srv-2']['/Connected'] = 1
 
-                elif values[str(item)]["name"] == dbusservice['pico_srv-2']['/CustomName']:
+                elif values[str(item)]["name"] == dbusservice['pico_srv-3']['/CustomName']:
                     dbusservice['pico_srv-3']['/Level'] =               float(values[str(item)]["currentLevel"]*100)
                     dbusservice['pico_srv-3']['/Remaining'] =           float(values[str(item)]["currentVolume"])
                     dbusservice['pico_srv-3']['/Connected'] = 1
@@ -90,7 +90,7 @@ def update_values():
                     dbusservice['pico_srv-4']['/Dc/0/Voltage'] =        round(float(values[str(item)]["voltage"]),2)
                     dbusservice['pico_srv-4']['/Dc/0/Current'] =        round(1- float(values[str(item)]["current"])-1,2)
                     dbusservice['pico_srv-4']['/Dc/0/Power'] =          round(1- float(values[str(item)]["voltage"]) * float(values[str(item)]["current"])-1,1)
-                    dbusservice['pico_srv-4']['/TimeToGo'] =            int(values[str(item)]["capacity.timeRemaining"]*6)
+#                    dbusservice['pico_srv-4']['/TimeToGo'] =            int(values[str(item)]["capacity.timeRemaining"]*6)
                     dbusservice['pico_srv-4']['/Soc'] =                 float(values[str(item)]["stateOfCharge"]) * 100
                     dbusservice['pico_srv-4']['/Connected'] = 1
 
@@ -258,7 +258,7 @@ def new_pico_service(base, type, physical, connection, id, instance, settingId =
             addSetting(setting , '/CustomName', self)
 
         self.add_path('/Soc', 0,                writeable=True)
-        self.add_path('/TimeToGo', 0,           writeable=True)
+#        self.add_path('/TimeToGo', 0,           writeable=True)
         self.add_path('/Dc/0/Voltage', 0,       writeable=True)
         self.add_path('/Dc/1/Voltage', 0,       writeable=True)
         self.add_path('/Dc/0/Current', 0,       writeable=True)
